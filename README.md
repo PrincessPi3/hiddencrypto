@@ -18,5 +18,5 @@ To decrypt:
 `sh hidden.sh dec`  
 
 ## License
-Distributed under the [WTFPL Version 2](//www.wtfpl.net/) [![WTFPL](assets/wtfpl-badge.png)](//www.wtfpl.net/)  
-See [assets/COPYING.txt](COPYING.txt) for text  
+Distributed under the [WTFPL Version 2](http://www.wtfpl.net/) [![WTFPL](assets/wtfpl-badge.png)](http://www.wtfpl.net/)  
+See [assets/COPYING.txt](assets/COPYING.txt) for text  
