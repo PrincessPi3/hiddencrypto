@@ -55,6 +55,8 @@ elif [ $1 = "install" ]; then
 		echo "$dir_to_encrypt Not Found, Creating..."
 		mkdir $dir_to_encrypt
 	fi
+
+	echo "Success: Ready to use"
 else
-	echo "Usage:\nEncrypt:\n\t./hidden.sh enc\nDecrypt:\n\t./hidden.sh dec\nInstall:\n\t./hidden.sh install"
+	echo "Usage:\nEncrypt:\n\tsh hidden.sh enc\nDecrypt:\n\tsh hidden.sh dec\nInstall:\n\tsh hidden.sh install"
 fi
