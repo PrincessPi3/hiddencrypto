@@ -58,5 +58,5 @@ elif [ $1 = "install" ]; then
 
 	echo "Success: Ready to use"
 else
-	echo "Usage:\nEncrypt:\n\tsh hidden.sh enc\nDecrypt:\n\tsh hidden.sh dec\nInstall:\n\tsh hidden.sh install"
+	echo "Usage:\nEncrypt:\n\tsh hiddencrypto.sh enc\nDecrypt:\n\tsh hiddencrypto.sh dec\nInstall:\n\tsh hiddencrypto.sh install"
 fi
