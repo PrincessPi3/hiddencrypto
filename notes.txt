@@ -1,0 +1,5 @@
+srm is from the secure-delete package
+
+srm -rz to_encrypt
+srm -rz .volume.bin
+srm -rz encrypted_volume.tar.bz2
