@@ -1,6 +1,19 @@
 # hiddencrypto
 Silly lil script for using [scrypt](https://github.com/Tarsnap/scrypt), [secure-delete  (srm)](https://github.com/BlackArch/secure-delete), and tar to open and close an encrypted (scrypt) and compressed (bz2) and shred (srm) any lingering data immediately.
 
+## Textwall about the frickin thing
+Made a silly little little script to actually do encryption and decryption of a directory the way it should be done.
+I was totally fucked off by the normie file encryption utilities like Veracrypt,. Cryptomator and `openssl enc` because in practice they have a couple absolutely glaring flaws.
+
+For one, they are STILL using PMDKF2 as the KDF (Key Derivation Function, the algo that deterministically generates the 256-bit key from a passphrase) and the simple truth is that PBDKF2 is criminally outdated and no ever increasing number of iterations into the millions and millions are ever gonna change that.
+So, I selected the gigachad KDF, Scrypt to generate the 256-bit key. It features appx.10 billion times the hardware cost to crack vs `openssl enc` it has appx. 20,000 times greater hardware cost to crack vs PBDK2 with any number of iterations, and appx. 4,000 times the hardware cost to crack vs Bcrypt, the algo used to hash Linux passwords.
+Scrypt is stable and solid, and has passed countless rounds of cryptanalysis and revision by Cypherpunks and the wider cryptography community, so it should be quite cryptographically secure.
+
+The oither glaring issue that the normie cryptography utilities had was the fact that when files are moved to the volume, there is no shredding of the "ghost" file at the location it camer from, and in some cases, even left data traes on the disk without securely shredding them to clean up.
+To that end, I'm using the secure-delete package to secure wipe any temporary or ghost bytes off the record.
+srm is used to delete files and directories immediately upon compl,eting the next step successfully.. smem 
+hiddencrypto will also have an option to wide empty space on a given disk for convenience.
+
 ## Back Up Your Shit
 * This script is probably as unstable as I am and will probably end up nuking your files
 * If you lose your passphrase or type it in wrong twice on encryption, your data has gone bye bye
