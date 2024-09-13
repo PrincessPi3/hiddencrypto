@@ -55,8 +55,7 @@ elif [ $1 = "install" ]; then
 	        echo "Success: Installed"
 	fi
 
-    if ! [ -d "./secure-delete" ]; then
-        git clone https://github.com/BlackArch/secure-delete.git
+    if ! [ -f "./secure-delete/smem" ]; then
         cd secure-delete
         make
     fi
