@@ -21,7 +21,7 @@ encrypty(){
     ./secure-delete/srm -rz $encrypted_volume_name
     # check success of previous or die
     echo "Shredding deallocated RAM..."
-    ./secure-delete/smem -l
+    sudo ./secure-delete/smem -l
     echo "Success: Done"
 }
 
@@ -39,6 +39,8 @@ decrypty(){
     echo "Successfully Decompressed Decrypted Archive, Shredding Decrypted Archive..."
     ./secure-delete/srm -rz $encrypted_volume_name
     # check success of previous or die
+    echo "Shredding deallocated RAM..."
+    sudo ./secure-delete/smem -l
     echo "Success: Done"
 }
 
