@@ -56,8 +56,7 @@ elif [ $1 = "install" ]; then
 	fi
 
     if ! [ -f "./secure-delete/smem" ]; then
-        cd secure-delete
-        make
+        cd secure-delete && make
     fi
 
 	if ! [ -d $dir_to_encrypt ]; then
