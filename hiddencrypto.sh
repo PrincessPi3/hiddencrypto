@@ -20,8 +20,8 @@ encrypty(){
     echo "Successfully Encrypted, Shredding Archive..."
     ./secure-delete/srm -rz $encrypted_volume_name
     # check success of previous or die
-    echo "Shredding deallocated RAM..."
-    sudo ./secure-delete/smem -l
+    echo "Wiping deallocated RAM..."
+    sudo ./secure-delete/smem -l -v
     echo "Success: Done"
 }
 
@@ -40,7 +40,7 @@ decrypty(){
     ./secure-delete/srm -rz $encrypted_volume_name
     # check success of previous or die
     echo "Shredding deallocated RAM..."
-    sudo ./secure-delete/smem -l
+    sudo ./secure-delete/smem -l -v
     echo "Success: Done"
 }
 
@@ -58,8 +58,7 @@ elif [ $1 = "install" ]; then
     if ! [ -d "./secure-delete" ]; then
         git clone https://github.com/BlackArch/secure-delete.git
         cd secure-delete
-        sed -i -e 's/-mpreferred-stack-boundary=2//g' Makefile
-        make > /dev/null
+        make
     fi
 
 	if ! [ -d $dir_to_encrypt ]; then
