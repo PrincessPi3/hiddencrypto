@@ -41,7 +41,7 @@ decrypty(){
     echo "Successfully Decompressed Decrypted Archive, Shredding Decrypted Archive..."
     srm -rz $encrypted_volume_name
 
-    echo "Shredding deallocated RAM..."
+    echo "Wiping deallocated RAM..."
     sudo smem -ll # -ll is a single overwrite mode with 0xFF, single mode used for speed
 
     echo "Success: Done"
