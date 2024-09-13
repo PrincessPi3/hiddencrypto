@@ -60,7 +60,7 @@ elif [ $1 = "install" ]; then
         cd ./.secure-delete
         make
         echo "Installing Edited secure-delete Utiliies..."
-        sudo make insstall
+        sudo make install
         cd ..
     fi
 
