@@ -21,7 +21,7 @@ encrypty(){
     ./secure-delete/srm -rz $encrypted_volume_name
     # check success of previous or die
     echo "Wiping deallocated RAM..."
-    sudo ./secure-delete/smem -l -v
+    sudo ./.secure-delete/smem -l -v
     echo "Success: Done"
 }
 
@@ -31,16 +31,16 @@ decrypty(){
     scrypt dec $encrypted_archive_name $encrypted_volume_name
     # check success of previous or die
     echo "Successfully Decrytped, Shredding Encrypted Archive..."
-    ./secure-delete/srm -rz $encrypted_archive_name
+    ./.secure-delete/srm -rz $encrypted_archive_name
     # check success of previous or die
     echo "Successfully Shredded Encrypted Archive, Decompressing..."
     tar xfj $encrypted_volume_name
     # check success of previous or die
     echo "Successfully Decompressed Decrypted Archive, Shredding Decrypted Archive..."
-    ./secure-delete/srm -rz $encrypted_volume_name
+    ./.secure-delete/srm -rz $encrypted_volume_name
     # check success of previous or die
     echo "Shredding deallocated RAM..."
-    sudo ./secure-delete/smem -l -v
+    sudo ./.secure-delete/smem -l -v
     echo "Success: Done"
 }
 
@@ -55,8 +55,8 @@ elif [ $1 = "install" ]; then
 	        echo "Success: Installed"
 	fi
 
-    if ! [ -f "./secure-delete/smem" ]; then
-        cd ./secure-delete && make
+    if ! [ -f "./.secure-delete/smem" ]; then
+        cd ./.secure-delete && make
     fi
 
 	if ! [ -d $dir_to_encrypt ]; then
