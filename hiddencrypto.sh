@@ -10,37 +10,40 @@ encrypted_volume_name=./.encrypted_volume.tar.bz2
 encrypty(){
     echo "Compressing Directory..."
     tar cfj $encrypted_volume_name $dir_to_encrypt
-    # check success of previous or die
+
     echo "Sucesfully Compressed, Shredding Directory..."
     srm -rz $dir_to_encrypt
-    # check success of previous or die
+
     echo "Successfully Shredded Directory, Encrypting. Please Input Passphrase..."
     scrypt enc $encrypted_volume_name $encrypted_archive_name
-    # check success of previous or die
+
     echo "Successfully Encrypted, Shredding Archive..."
     srm -rz $encrypted_volume_name
-    # check success of previous or die
+
     echo "Wiping deallocated RAM..."
     sudo ./.secure-delete/smem -l -v
-    echo "Success: Done"
+
+    echo "Success: Encryption Done"
 }
 
 decrypty(){
     echo "Starting..."
+
     echo "Decrypting. Please Input Passphrase..."
     scrypt dec $encrypted_archive_name $encrypted_volume_name
-    # check success of previous or die
+
     echo "Successfully Decrytped, Shredding Encrypted Archive..."
     srm -rz $encrypted_archive_name
-    # check success of previous or die
+
     echo "Successfully Shredded Encrypted Archive, Decompressing..."
     tar xfj $encrypted_volume_name
-    # check success of previous or die
+
     echo "Successfully Decompressed Decrypted Archive, Shredding Decrypted Archive..."
     srm -rz $encrypted_volume_name
-    # check success of previous or die
+
     echo "Shredding deallocated RAM..."
-    sudo smem -l -v
+    sudo smem -l
+
     echo "Success: Done"
 }
 
@@ -49,7 +52,7 @@ if [ "$1" = "enc" ]; then
 elif [ "$1" = "dec" ]; then
     decrypty
 elif [ $1 = "install" ]; then 
-	if ! [ -f "$(command -v scrypt)" ] &&  [ -f "$(command -v tar)" ] && [ -f "$(command -v make)" ]; then
+	if ! [ -f "$(command -v scrypt)" ] &&  [ -f "$(command -v tar)" ] && [ -f "$(command -v gcc)" ]; then
         	echo "Needed Applications Not Found, Installing..."
 	        sudo apt install scrypt secure-delete tar build-essential
 	        echo "Success: Installed"
@@ -59,9 +62,15 @@ elif [ $1 = "install" ]; then
         echo "Building Edited secure-delete Utilities..."
         cd ./.secure-delete
         make
+
         echo "Installing Edited secure-delete Utiliies..."
         sudo make install
+        
+        echo "Cleaning Up From Build..."
         cd ..
+        rm -rf /.secure-delete
+        
+        echo "Success: secure-delete Installed"
     fi
 
 	if ! [ -d $dir_to_encrypt ]; then
