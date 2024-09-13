@@ -5,20 +5,20 @@ set -e
 dir_to_encrypt=./to_encrypt
 encrypted_archive_name=./.volume.bin
 
-encrypted_volume_name=./.encrypted_volume.tar.bz2
+encrypted_volume_name=./encrypted_volume.tar.bz2
 
 encrypty(){
     echo "Compressing Directory..."
     tar cfj $encrypted_volume_name $dir_to_encrypt
     # check success of previous or die
     echo "Sucesfully Compressed, Shredding Directory..."
-    srm -rz $dir_to_encrypt
+    ./secure-delete/srm -rz $dir_to_encrypt
     # check success of previous or die
     echo "Successfully Shredded Directory, Encrypting. Please Input Passphrase..."
     scrypt enc $encrypted_volume_name $encrypted_archive_name
     # check success of previous or die
     echo "Successfully Encrypted, Shredding Archive..."
-    srm -rz $encrypted_volume_name
+    ./secure-delete/srm -rz $encrypted_volume_name
     # check success of previous or die
     echo "Wiping deallocated RAM..."
     sudo ./.secure-delete/smem -l -v
@@ -31,16 +31,16 @@ decrypty(){
     scrypt dec $encrypted_archive_name $encrypted_volume_name
     # check success of previous or die
     echo "Successfully Decrytped, Shredding Encrypted Archive..."
-    srm -rz $encrypted_archive_name
+    ./.secure-delete/srm -rz $encrypted_archive_name
     # check success of previous or die
     echo "Successfully Shredded Encrypted Archive, Decompressing..."
     tar xfj $encrypted_volume_name
     # check success of previous or die
     echo "Successfully Decompressed Decrypted Archive, Shredding Decrypted Archive..."
-    srm -rz $encrypted_volume_name
+    ./.secure-delete/srm -rz $encrypted_volume_name
     # check success of previous or die
     echo "Shredding deallocated RAM..."
-    sudo smem -l -v
+    sudo ./.secure-delete/smem -l -v
     echo "Success: Done"
 }
 
@@ -57,11 +57,7 @@ elif [ $1 = "install" ]; then
 
     if ! [ -f "./.secure-delete/smem" ]; then
         echo "Building Edited secure-delete Utilities..."
-        cd ./.secure-delete
-        make
-        echo "Installing Edited secure-delete Utiliies..."
-        sudo make insstall
-        cd ..
+        cd ./.secure-delete && make
     fi
 
 	if ! [ -d $dir_to_encrypt ]; then
