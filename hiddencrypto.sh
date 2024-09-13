@@ -21,7 +21,7 @@ encrypty(){
     srm -rz $encrypted_volume_name
 
     echo "Wiping deallocated RAM..."
-    sudo ./.secure-delete/smem -l -v
+    sudo smem -ll  # -ll is a single overwrite mode with 0xFF, single mode used for speed
 
     echo "Success: Encryption Done"
 }
@@ -42,7 +42,7 @@ decrypty(){
     srm -rz $encrypted_volume_name
 
     echo "Shredding deallocated RAM..."
-    sudo smem -l
+    sudo smem -ll # -ll is a single overwrite mode with 0xFF, single mode used for speed
 
     echo "Success: Done"
 }
@@ -52,7 +52,7 @@ if [ "$1" = "enc" ]; then
 elif [ "$1" = "dec" ]; then
     decrypty
 elif [ $1 = "install" ]; then 
-	if ! [ -f "$(command -v scrypt)" ] &&  [ -f "$(command -v tar)" ] && [ -f "$(command -v gcc)" ]; then
+	if ! [ -f "$(command -v scrypt)" ] &&  [ -f "$(command -v tar)" ] && [ -f "$(command -v make)" ]; then
         	echo "Needed Applications Not Found, Installing..."
 	        sudo apt install scrypt secure-delete tar build-essential
 	        echo "Success: Installed"
@@ -68,8 +68,8 @@ elif [ $1 = "install" ]; then
         
         echo "Cleaning Up From Build..."
         cd ..
-        rm -rf /.secure-delete
-        
+        srm -rz /.secure-delete
+
         echo "Success: secure-delete Installed"
     fi
 
