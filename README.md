@@ -38,7 +38,7 @@ To install:
 cd ~
 git clone https://github.com/PrincessPi3/hiddencrypto.git
 cd hiddencrypto
-sh hiddencrypto.sh install
+sudo sh hiddencrypto.sh install
 ```
   
 To encrypt:  

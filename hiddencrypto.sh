@@ -68,7 +68,7 @@ elif [ $1 = "install" ]; then
         
         echo "Cleaning Up From Build..."
         cd ..
-        srm -rz ./.secure-delete
+        sudo srm -rz ./.secure-delete
 
         echo "Success: secure-delete Installed"
     fi
