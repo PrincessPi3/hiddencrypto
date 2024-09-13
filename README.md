@@ -9,8 +9,14 @@ Silly lil script for using [scrypt](https://github.com/Tarsnap/scrypt), [secure-
 
 ## Important Details
 * Each time you encrypt the directory, it will use a brand new passphrase that you input. You can still use the old one, but it is set each time to whatever you enter twice regardless of the previous passphrase
-* Back Up Your Shit! This is a completely unforgiving script when it comes to setting the password wrong
-
+* Use a [secure passphrase](assets/how-to-create-a-secure-passphrase-2017-08-10_HQP.pdf) and DO NOT SAVE ON COMPUTER OR PASSSWORD MANAGER! Only save your passphrase on **PHYSICAL PAPER**
+* **Back Up Your Shit!** This is a completely unforgiving script when it comes to setting the password wrong
+* When creating encrypted backups, be certain to use a seperate, completely dissimilar passphrase for it. Store this passphrase on a seperate piece of paper, stored seperately
+* **Test Your Backups** Make completely sure they work and that you a precise and accurate passphrase for them
+* If your system has automatic backuops, RAID, cloud storage uplaods, or any other type of redundancy system in place, you should exclude the hiddebncrypto directory from it. Otherwise, partial or even data leaking data could be copied or even uploaded
+* **BE AWARE** When moving files from unencrypted drives to the encrypted arcive, **the original files may be recoverable from the original location** even if they are not visible. It is a best practice to shred empty space on that disk afterwords to ensure the orignal data is not forensically recoverable
+* Best practice is to disable networking when using hiddencrypto
+  
 ## Usage
 To install:  
 `sh hidden.sh install`  
@@ -21,28 +27,16 @@ To encrypt:
 To decrypt:  
 `sh hidden.sh dec`  
 
-**Misc Considerations to Properly Format and Flesh Out Later (maybe lmfao)/Todo**
-```
-Shredding the footprint of files moved to the encrypted dir
-    Shredding empty space on disk // script?
-Disk management issues
-    Automated backup issues: temporarily disable or exempt automated backups
-    RAID/etc considerations
-Manual and secure backups of encrypted data
-        Use independant passphrases for password failure recovery
-        Test backups with its passphrase
-High-security passphrase generation and storage
-    Link to excellent passphrase creation guide
-    Caution to not use password generator on comptuer, instead create manually on PAPER
-    Write down on paper, no digital files saved anywhere EVER- Physical ONLY
-        Or just memorize your passphrases lol
-Total data descruction by shredding headers and/or encrypted file // script? automate? lol
-Potential memory key leaks
-Potential OS key leaks
-Potential side-channel attacks
-Best practice reccomendation to disable networking when using hiddencrypto
-```
-
 ## License
 Distributed under the [WTFPL Version 2](http://www.wtfpl.net/) [![WTFPL](assets/wtfpl-badge.png)](http://www.wtfpl.net/)  
 See [assets/COPYING.txt](assets/COPYING.txt) for text  
+  
+  
+```
+Todo:
+
+Total data descruction by shredding headers and/or encrypted file // script // automatable call
+Potential memory key leaks
+Potential OS key leaks
+Potential side-channel attacks
+```
