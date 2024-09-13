@@ -31,10 +31,15 @@ smem is used to wipe unallocated RAM to ensure that no remaning traces of data a
 * If your system has automatic backuops, RAID, cloud storage uplaods, or any other type of redundancy system in place, you should exclude the hiddebncrypto directory from it. Otherwise, partial or even data leaking data could be copied or even uploaded
 * **BE AWARE** When moving files from unencrypted drives to the encrypted arcive, **the original files may be recoverable from the original location** even if they are not visible. It is a best practice to shred empty space on that disk afterwords to ensure the orignal data is not forensically recoverable
 * Best practice is to disable networking when using hiddencrypto
-  
+
 ## Usage
 To install:  
-`sh hidden.sh install`  
+```
+cd ~
+git clone https://github.com/PrincessPi3/hiddencrypto.git
+cd hiddencrypto
+sh hidden.sh install
+```
   
 To encrypt:  
 `sh hidden.sh enc`  
@@ -50,7 +55,6 @@ See [assets/COPYING.txt](assets/COPYING.txt) for text
 ```
 Todo:
 
-Total data descruction by shredding headers and/or encrypted file // script // automatable call
 Potential memory key leaks
 Potential OS key leaks
 Potential side-channel attacks
