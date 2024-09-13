@@ -38,14 +38,14 @@ To install:
 cd ~
 git clone https://github.com/PrincessPi3/hiddencrypto.git
 cd hiddencrypto
-sh hidden.sh install
+sh hiddencrypto.sh install
 ```
   
 To encrypt:  
-`sh hidden.sh enc`  
+`sh hiddencrypto.sh enc`  
   
 To decrypt:  
-`sh hidden.sh dec`  
+`sh hiddencrypto.sh dec`  
 
 ## License
 Distributed under the [WTFPL Version 2](http://www.wtfpl.net/) [![WTFPL](assets/wtfpl-badge.png)](http://www.wtfpl.net/)  

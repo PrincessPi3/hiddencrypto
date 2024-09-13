@@ -61,7 +61,7 @@ elif [ $1 = "install" ]; then
     if ! [ -f "./.secure-delete/smem" ]; then
         echo "Building Edited secure-delete Utilities..."
         cd ./.secure-delete
-        make
+        sudo make
 
         echo "Installing Edited secure-delete Utiliies..."
         sudo make install
